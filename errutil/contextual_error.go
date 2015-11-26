@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/elves/elvish/strutil"
+	"github.com/tw4452852/elvish/strutil"
 )
 
 // ContextualError is an error associated with a particular point in a source

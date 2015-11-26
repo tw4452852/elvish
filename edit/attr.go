@@ -1,7 +1,7 @@
 package edit
 
 import (
-	"github.com/elves/elvish/parse"
+	"github.com/tw4452852/elvish/parse"
 )
 
 var (

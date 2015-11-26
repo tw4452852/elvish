@@ -6,8 +6,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/elves/elvish/eval"
-	"github.com/elves/elvish/parse"
+	"github.com/tw4452852/elvish/eval"
+	"github.com/tw4452852/elvish/parse"
 )
 
 type tokenPart struct {

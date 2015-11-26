@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/elves/elvish/parse"
-	"github.com/elves/elvish/store"
-	"github.com/elves/elvish/sys"
+	"github.com/tw4452852/elvish/parse"
+	"github.com/tw4452852/elvish/store"
+	"github.com/tw4452852/elvish/sys"
 )
 
 const lackEOL = "\033[7m\u23ce\033[m\n"

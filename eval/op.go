@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/elves/elvish/parse"
+	"github.com/tw4452852/elvish/parse"
 )
 
 const (

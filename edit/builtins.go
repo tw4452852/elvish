@@ -6,7 +6,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/elves/elvish/strutil"
+	"github.com/tw4452852/elvish/strutil"
 )
 
 // Line editor builtins.

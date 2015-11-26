@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/elves/elvish/errutil"
-	"github.com/elves/elvish/parse"
+	"github.com/tw4452852/elvish/errutil"
+	"github.com/tw4452852/elvish/parse"
 )
 
 // staticNS is the static type information of a namespace.

@@ -11,8 +11,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/elves/elvish/parse"
-	"github.com/elves/elvish/strutil"
+	"github.com/tw4452852/elvish/parse"
+	"github.com/tw4452852/elvish/strutil"
 )
 
 // Value is the runtime representation of an elvish value.

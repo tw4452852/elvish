@@ -8,7 +8,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/elves/elvish/parse"
+	"github.com/tw4452852/elvish/parse"
 )
 
 type exitusOp func(*evalCtx) exitus

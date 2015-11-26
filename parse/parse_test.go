@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/elves/elvish/print"
+	"github.com/tw4452852/elvish/print"
 )
 
 func compoundOfOnePrimary(p *Primary) *Compound {

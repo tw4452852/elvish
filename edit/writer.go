@@ -8,7 +8,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/elves/elvish/sys"
+	"github.com/tw4452852/elvish/sys"
 )
 
 const (

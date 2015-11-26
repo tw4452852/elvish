@@ -22,7 +22,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/elves/elvish/errutil"
+	"github.com/tw4452852/elvish/errutil"
 )
 
 // Parser maintains the states during parsing.

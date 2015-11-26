@@ -12,9 +12,9 @@ import (
 	"syscall"
 	"unicode/utf8"
 
-	"github.com/elves/elvish/errutil"
-	"github.com/elves/elvish/parse"
-	"github.com/elves/elvish/store"
+	"github.com/tw4452852/elvish/errutil"
+	"github.com/tw4452852/elvish/parse"
+	"github.com/tw4452852/elvish/store"
 )
 
 const fnPrefix = "fn-"
