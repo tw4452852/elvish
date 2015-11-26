@@ -189,7 +189,10 @@ var keyBindings = map[bufferMode]map[Key]string{
 		Key{'i', 0}:    "start-insert",
 		Key{'h', 0}:    "move-dot-left",
 		Key{'l', 0}:    "move-dot-right",
-		Key{'D', 0}:    "kill-line-right",
+		Key{'k', 0}:    "move-dot-up",
+		Key{'j', 0}:    "move-dot-down",
+		Key{'U', Ctrl}: "kill-line-left",
+		Key{'W', Ctrl}: "kill-word-left",
 		Key{'0', 0}:    "move-dot-begin",
 		Key{'$', 0}:    "move-dot-end",
 		DefaultBinding: "default-command",
@@ -197,7 +200,6 @@ var keyBindings = map[bufferMode]map[Key]string{
 	modeInsert: map[Key]string{
 		Key{'[', Ctrl}:    "start-command",
 		Key{'U', Ctrl}:    "kill-line-left",
-		Key{'K', Ctrl}:    "kill-line-right",
 		Key{'W', Ctrl}:    "kill-word-left",
 		Key{Backspace, 0}: "kill-rune-left",
 		// Some terminal send ^H on backspace
