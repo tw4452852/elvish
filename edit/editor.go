@@ -192,9 +192,11 @@ var keyBindings = map[bufferMode]map[Key]string{
 		Key{'k', 0}:    "move-dot-up",
 		Key{'j', 0}:    "move-dot-down",
 		Key{'U', Ctrl}: "kill-line-left",
+		Key{'C', 0}:    "kill-line-right start-insert",
 		Key{'W', Ctrl}: "kill-word-left",
 		Key{'0', 0}:    "move-dot-begin",
 		Key{'$', 0}:    "move-dot-end",
+		Key{'a', 0}:    "move-dot-end start-insert",
 		DefaultBinding: "default-command",
 	},
 	modeInsert: map[Key]string{
@@ -243,9 +245,11 @@ var keyBindings = map[bufferMode]map[Key]string{
 
 func init() {
 	for _, kb := range keyBindings {
-		for _, name := range kb {
-			if leBuiltins[name] == nil {
-				panic("bad keyBindings table: no editor builtin named " + name)
+		for _, names := range kb {
+			for _, name := range strings.Fields(names) {
+				if leBuiltins[name] == nil {
+					panic("bad keyBindings table: no editor builtin named " + name)
+				}
 			}
 		}
 	}
@@ -432,21 +436,23 @@ MainLoop:
 				continue
 			}
 
-			name, bound := keyBinding[k]
+			names, bound := keyBinding[k]
 			if !bound {
-				name = keyBinding[DefaultBinding]
+				names = keyBinding[DefaultBinding]
 			}
-			ret := leBuiltins[name](ed, k)
-			if ret == nil {
-				continue
-			}
-			switch ret.action {
-			case noAction:
-				continue
-			case reprocessKey:
-				goto lookupKey
-			case exitReadLine:
-				return ret.readLineReturn
+			for _, name := range strings.Fields(names) {
+				ret := leBuiltins[name](ed, k)
+				if ret == nil {
+					continue
+				}
+				switch ret.action {
+				case noAction:
+					continue
+				case reprocessKey:
+					goto lookupKey
+				case exitReadLine:
+					return ret.readLineReturn
+				}
 			}
 		}
 	}
