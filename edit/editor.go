@@ -190,6 +190,8 @@ var keyBindings = map[bufferMode]map[Key]string{
 		Key{'h', 0}:    "move-dot-left",
 		Key{'l', 0}:    "move-dot-right",
 		Key{'D', 0}:    "kill-line-right",
+		Key{'0', 0}:    "move-dot-begin",
+		Key{'$', 0}:    "move-dot-end",
 		DefaultBinding: "default-command",
 	},
 	modeInsert: map[Key]string{

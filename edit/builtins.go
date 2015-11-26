@@ -42,6 +42,8 @@ var leBuiltins = map[string]leBuiltin{
 	"move-dot-right":  moveDotRight,
 	"move-dot-up":     moveDotUp,
 	"move-dot-down":   moveDotDown,
+	"move-dot-begin":  moveDotBegin,
+	"move-dot-end":    moveDotEnd,
 	"insert-key":      insertKey,
 	"return-line":     returnLine,
 	"return-eof":      returnEORight,
@@ -171,6 +173,16 @@ func moveDotDown(ed *Editor, k Key) *leReturn {
 	sol := strutil.FindLastSOL(ed.line[:ed.dot])
 	width := WcWidths(ed.line[sol:ed.dot])
 	ed.dot = nextSOL + len(TrimWcWidth(ed.line[nextSOL:nextEOL], width))
+	return nil
+}
+
+func moveDotBegin(ed *Editor, k Key) *leReturn {
+	ed.dot = strutil.FindLastSOL(ed.line[:ed.dot])
+	return nil
+}
+
+func moveDotEnd(ed *Editor, k Key) *leReturn {
+	ed.dot = strutil.FindFirstEOL(ed.line[ed.dot:]) + ed.dot
 	return nil
 }
 
