@@ -80,7 +80,9 @@ func (ed *Editor) appendHistory(line string) {
 
 func lastHistory(histories []string, upto int, prefix string) (int, string) {
 	for i := upto - 1; i >= 0; i-- {
-		if strings.HasPrefix(histories[i], prefix) {
+		if strings.HasPrefix(
+			strings.ToLower(histories[i]),
+			strings.ToLower(prefix)) {
 			return i, histories[i]
 		}
 	}
@@ -89,7 +91,9 @@ func lastHistory(histories []string, upto int, prefix string) (int, string) {
 
 func firstHistory(histories []string, from int, prefix string) (int, string) {
 	for i := from; i < len(histories); i++ {
-		if strings.HasPrefix(histories[i], prefix) {
+		if strings.HasPrefix(
+			strings.ToLower(histories[i]),
+			strings.ToLower(prefix)) {
 			return i, histories[i]
 		}
 	}

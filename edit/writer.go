@@ -376,6 +376,10 @@ tokens:
 		for _, r := range token.Val {
 			if hasComp && comp.start <= i && i < comp.end {
 				// Silence the part that is being completed
+			} else if bs.mode == modeHistory &&
+				i < len(bs.history.prefix) && r != rune(bs.history.line[i]) {
+				// case insensitive in history completion
+				b.write(rune(bs.history.line[i]), attrForCompletedHistory)
 			} else {
 				b.write(r, attrForType[token.Typ])
 			}
