@@ -6,7 +6,7 @@ import (
 
 var (
 	attrForPrompt            = ""
-	attrForRprompt           = "7"
+	attrForRprompt           = ""
 	attrForCompleted         = ";4"
 	attrForMode              = "1;7;33"
 	attrForTip               = ""
