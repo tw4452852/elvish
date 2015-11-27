@@ -62,9 +62,20 @@ func (c *completion) next(cycle bool) {
 // Find candidates by matching against a prefix.
 func prefixMatchCandidates(p string, all []string) (cands []*candidate) {
 	for _, s := range all {
-		if len(s) >= len(p) && s[:len(p)] == p {
+		if strings.HasPrefix(strings.ToUpper(s), strings.ToUpper(p)) {
 			cand := newCandidate()
-			cand.push(tokenPart{p, false})
+			if strings.HasPrefix(s, p) {
+				cand.push(tokenPart{p, false})
+			} else {
+				// find each different char as complete token
+				for i, r := range p {
+					if r != rune(s[i]) {
+						cand.push(tokenPart{string(s[i]), true})
+					} else {
+						cand.push(tokenPart{string(r), false})
+					}
+				}
+			}
 			cand.push(tokenPart{s[len(p):], true})
 			cands = append(cands, cand)
 		}
@@ -73,13 +84,17 @@ func prefixMatchCandidates(p string, all []string) (cands []*candidate) {
 }
 
 func fileNames(dir string) (names []string, err error) {
-	infos, e := ioutil.ReadDir(dir)
+	d := dir
+	if d == "" {
+		d = "."
+	}
+	infos, e := ioutil.ReadDir(d)
 	if e != nil {
 		err = e
 		return
 	}
 	for _, info := range infos {
-		names = append(names, info.Name())
+		names = append(names, dir+info.Name())
 	}
 	return
 }
@@ -175,23 +190,15 @@ func startCompletion(ed *Editor, k Key) *leReturn {
 	case parse.RedirFilenameContext:
 		// BUG(xiaq): File name completion does not deal with meta characters.
 		// Assume that compound is an incomplete filename
-		dir, file := path.Split(compound)
+		dir, _ := path.Split(compound)
 		findAll = func() ([]string, error) {
-			if dir == "" {
-				return fileNames(".")
-			}
 			return fileNames(dir)
 		}
 		makeCandidates = func(all []string) (cands []*candidate) {
 			// Make candidates out of elements that match the file component.
-			for _, s := range all {
-				if strings.HasPrefix(s, file) {
-					cand := newCandidate()
-					cand.push(tokenPart{compound, false})
-					cand.push(tokenPart{s[len(file):], true})
-					cand.attr = defaultLsColor.determineAttr(cand.text)
-					cands = append(cands, cand)
-				}
+			cands = prefixMatchCandidates(compound, all)
+			for _, cand := range cands {
+				cand.attr = defaultLsColor.determineAttr(cand.text)
 			}
 			return
 		}
